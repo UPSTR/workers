@@ -1,0 +1,70 @@
+<div class="modal">
+  <div class="modalContent">
+
+    <h3>{{getSaveButtonText()}}</h3>
+    <hr>
+    <form *ngIf="worker" [formGroup]="workerForm" (submit)="onSubmit()" novalidate>
+    <div class="formGroup">
+      <label>Фамилия</label>
+      <input type="text" formControlName="lastName" required [ngClass]="{
+      'has-error': !workerForm.get('firstName').valid && workerForm.get('firstName').touched,
+      'has-feedback': !workerForm.get('firstName').valid && workerForm.get('firstName').touched
+      }">
+      <div *ngIf="!workerForm.get('firstName').valid && workerForm.get('firstName').touched" class="error-msg">
+        <div>Фамилия - обязательное поле</div>
+      </div>
+    </div>
+    <div class="formGroup">
+      <label>Имя</label>
+      <input type="text" formControlName="firstName" required [ngClass]="{
+      'has-error': !workerForm.get('lastName').valid && workerForm.get('lastName').touched,
+      'has-feedback': !workerForm.get('lastName').valid && workerForm.get('lastName').touched
+      }">
+      <div *ngIf="!workerForm.get('lastName').valid && workerForm.get('lastName').touched" class="error-msg">
+        <div>Имя - обязательное поле</div>
+      </div>
+    </div>
+    <div class="formGroup">
+      <label>Отчество</label>
+      <input type="text" formControlName="middleName">
+    </div>
+    <div class="formGroup">
+      <label>Позиция</label>
+      <input type="text" formControlName="position" required [ngClass]="{
+      'has-error': !workerForm.get('position').valid && workerForm.get('position').touched,
+      'has-feedback': !workerForm.get('position').valid && workerForm.get('position').touched
+      }">
+      <div *ngIf="!workerForm.get('position').valid && workerForm.get('position').touched" class="error-msg">
+        <div>Позиция - обязательное поле</div>
+      </div>
+    </div>
+    <div class="formGroup">
+      <label>Должность</label>
+      <input type="text" formControlName="subdivision" required [ngClass]="{
+      'has-error': !workerForm.get('subdivision').valid && workerForm.get('subdivision').touched,
+      'has-feedback': !workerForm.get('subdivision').valid && workerForm.get('subdivision').touched
+      }">
+      <div *ngIf="!workerForm.get('subdivision').valid && workerForm.get('subdivision').touched" class="error-msg">
+        <div>Должность - обязательное поле</div>
+      </div>
+    </div>
+    <div class="formGroup">
+      <label>e-mail</label>
+      <input type="text" formControlName="email" required [ngClass]="{
+      'has-error': !workerForm.get('email').valid && workerForm.get('email').touched,
+      'has-feedback': !workerForm.get('email').valid && workerForm.get('email').touched
+      }">
+      <div *ngIf="!workerForm.get('email').valid && workerForm.get('email').touched" class="error-msg">
+        <div>E-mail - обязательное поле</div>
+      </div>
+    </div>
+    </form>
+    <hr>
+    <div class="controlsBlock">
+      <button class="btn btn-success control btnCancelControl" (click)="cancelModal($event)">Отмена</button>
+      <button class="btn btn-success control btnAddUpdateControl" (click)="onSubmit()">Сохранить</button>
+    </div>
+
+  </div>
+</div>
+<div class="bgModal" (click)="cancelModal($event)"></div>
