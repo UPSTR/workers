@@ -9,14 +9,8 @@ import {Router} from '@angular/router';
 })
 export class ListComponent implements OnInit {
   workersList: any[];
-
-  searchRequest: any = {
-    filter: '',
-    sortParamDto: {
-      fieldName: 'firstName',
-      isDesc: false
-    }
-  };
+  path: string[] = ['id'];
+  order = 1;
 
   public searchString: string;
 
@@ -30,10 +24,10 @@ export class ListComponent implements OnInit {
 
   }
 
-  changeSort($event) {
-    this.searchRequest.sortParamDto.fieldName = $event.fieldName;
-    this.searchRequest.sortParamDto.isDesc = $event.isDesc;
-    this.workersList = this.model.getWorkers();
+  sortTable(prop: string) {
+    this.path = prop.split('.')
+    this.order = this.order * (-1); // change order
+    return false; // do not reload
   }
 
   editWorker(id: number) {

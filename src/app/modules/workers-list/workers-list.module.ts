@@ -11,6 +11,7 @@ import {Router, RouterModule, Routes} from '@angular/router';
 import {SimpleDataSource} from '../../dataSource.model';
 import {Model} from '../../repository.model';
 import {MyFilterPipe} from '../../common/filter/filter';
+import {SortingWorkersPipe} from '../../common/sorting/sorting';
 
 const router: Routes = [{path: 'update', component: UpdateWorrkerComponent, outlet: 'popup' }];
 
@@ -23,8 +24,8 @@ const router: Routes = [{path: 'update', component: UpdateWorrkerComponent, outl
     ReactiveFormsModule,
     RouterModule.forChild(router),
   ],
-  declarations: [ListComponent, CreateComponent, UpdateComponent, MyFilterPipe],
-  exports: [ListComponent, CreateComponent, UpdateComponent],
+  declarations: [ListComponent, CreateComponent, UpdateComponent, MyFilterPipe, SortingWorkersPipe],
+  exports: [ListComponent, CreateComponent, UpdateComponent, SortingWorkersPipe],
   providers: [Model, SimpleDataSource],
 })
 export class WorkersListModule { }

@@ -1,24 +1,38 @@
 <div class="container">
   <input type="text" class="filterControl" name="searchString" placeholder="Филтр" [(ngModel)]="searchString">
 </div>
-
 <div class="container">
   <table class="table">
     <thead>
     <tr>
-      <th scope="col">#</th>
-      <th scope="col">Фамилия</th>
-      <th scope="col">Имя</th>
-      <th scope="col">Отчество</th>
-      <th scope="col">Позиция</th>
-      <th scope="col">Должнось</th>
-      <th scope="col">e-mail</th>
+      <th scope="col" (click)="sortTable('id')"># <span *ngIf="order === 1 && path[0] === 'id'"><i
+        class="fas fa-sort-up"></i></span><span *ngIf="order === -1 && path[0] === 'id'"><i
+        class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('lastName')">Фамилия <span *ngIf="order === 1 && path[0] === 'lastName'"><i
+        class="fas fa-sort-up"></i></span><span *ngIf="order === -1 && path[0] === 'lastName'"><i
+        class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('firstName')">Имя <span *ngIf="order === 1 && path[0] === 'firstName'"><i
+        class="fas fa-sort-up"></i></span><span *ngIf="order === -1 && path[0] === 'firstName'"><i
+        class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('middleName')">Отчество <span
+        *ngIf="order === 1 && path[0] === 'middleName'"><i class="fas fa-sort-up"></i></span><span
+        *ngIf="order === -1 && path[0] === 'middleName'"><i class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('position')">Позиция <span *ngIf="order === 1 && path[0] === 'position'"><i
+        class="fas fa-sort-up"></i></span><span *ngIf="order === -1 && path[0] === 'position'"><i
+        class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('subdivision')">Должнось <span
+        *ngIf="order === 1 && path[0] === 'subdivision'"><i class="fas fa-sort-up"></i></span><span
+        *ngIf="order === -1 && path[0] === 'subdivision'"><i class="fas fa-sort-down"></i></span></th>
+      <th scope="col" (click)="sortTable('email')">e-mail <span *ngIf="order === 1 && path[0] === 'email'"><i
+        class="fas fa-sort-up"></i></span><span *ngIf="order === -1 && path[0] === 'email'"><i
+        class="fas fa-sort-down"></i></span></th>
       <th scope="col"></th>
       <th scope="col"></th>
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of workersList |  myfilter : searchString; let i = index">
+    <!--<tr *ngFor="let item of workersList |  myfilter: searchString ; let i = index">-->
+    <tr *ngFor="let item of workersList | myfilter: searchString | sortingWorkers : path : order;">
       <td class="itemId">{{item.id}}</td>
       <td>{{item.lastName}}</td>
       <td>{{item.firstName}}</td>
@@ -27,10 +41,12 @@
       <td>{{item.subdivision}}</td>
       <td>{{item.email}}</td>
       <td class="controls">
-        <button type="button" class="btn btn-success control" (click)="editWorker(item.id)"><i class="fas fa-edit"></i></button>
+        <button type="button" class="btn btn-success control" (click)="editWorker(item.id)"><i class="fas fa-edit"></i>
+        </button>
       </td>
       <td class="controls">
-        <button type="button" class="btn btn-danger control" (click)="deleteItem(item.id)"><i class="fas fa-times"></i></button>
+        <button type="button" class="btn btn-danger control" (click)="deleteItem(item.id)"><i class="fas fa-times"></i>
+        </button>
       </td>
     </tr>
     </tbody>
